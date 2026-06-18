@@ -1,33 +1,44 @@
-<!--Kann die Seite auf eng und de machen zum wehchseln-->
+<!-- Future: Add German / English language switch -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initale-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
 
 <body>
-  <div class="menu">
-    <button id="thought-button"
-            class="menu-button active">
-     Gedanke
-    </button>
-    <button id="analyze-button"
-            class="menu-button">
-     Analyse
-    </button>
-  </div>
+  <div class="main-content">
 
-  <div>
     <button id="home-button">
-      <img src="assets/images/ai-generated/home.png" alt="home">
+      <img
+        src="assets/images/ai-generated/home.png"
+        alt="home">
     </button>
+
+    <div class="menu">
+      <button
+        id="thought-button"
+        class="menu-button active">
+        Thought
+      </button>
+
+      <button
+        id="feeling-button"
+        class="menu-button">
+        Feeling
+      </button>
+
+      <button
+        id="analyze-button"
+        class="menu-button">
+        Analyze
+      </button>
+    </div>
+
   </div>
-
 </body>
-
 </html>

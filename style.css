@@ -4,6 +4,8 @@ body {
   min-height: 100vh;
 
   display: flex;
+  justify-content: center;
+  align-items: flex-start;
 
   background:url("assets/images/ai-generated/HomeBackground.png");
 
@@ -12,19 +14,28 @@ body {
   background-repeat: no-repeat;  
 }
 
-/* MENU */
-.menu {
-  margin-top: 20px;
+/* main content on home screen */
+.main-content {
   display: flex;
-  gap: 25px;
+  flex-direction: column;
+  align-items: center;
 }
 
-.menu-button {
+/* menu content */
+.menu {
+  margin-top: 180px;
 
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* menu buttons */
+.menu-button {
   width: 300px;
   height: 140px;
 
-  font-size: 25px;
+  font-size: 42px;
   color: white;
   
   border: none;
@@ -59,25 +70,22 @@ body {
   0 0 25px rgba(0, 225, 255, 0.8);
 }
 
+/* home button*/
 #home-button {
   /*sets width to, auto omitted */
   height: 150px;
+  margin-top: 30px;
 
   background: transparent;
   border: none;
 
-  display: flex;
-  align-items: center;
-
   cursor: pointer;
 
+  /* transition belongs on the base element, not :hover */
+  transition: all 0.4s ease-in-out;
 }
 
 #home-button:hover {
-  transform: translateZ(1px);
-
   filter: brightness(1.1);
   transform: scale(1.005);
-
-  transition: all 0.4s ease-in-out;
 }

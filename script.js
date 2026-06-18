@@ -1,21 +1,20 @@
 const thoughtButton =
-  document.querySelector("#thought-button")
+  document.querySelector("#thought-button");
 
 const analyzeButton =
-  document.querySelector("#analyze-button")
-
+  document.querySelector("#analyze-button");
 
 analyzeButton.addEventListener("click", () => {
-  analyzeButton.textContent = "Grr"
+  analyzeButton.textContent = "Meowwww"
 });
 
 thoughtButton.addEventListener("click", () => {
   thoughtButton.classList.toggle("active")
   if (thoughtButton.classList.contains("active")) {
-    thoughtButton.textContent = "Gedanke";
+    thoughtButton.textContent = "Thought";
   } else {
-    thoughtButton.textContent = "Miau";
-    alert("Grrrr");
+    thoughtButton.textContent = "Meoww";
+    alert("Heyyy <3");
   }
 });
 
@@ -23,5 +22,7 @@ const homeButton =
   document.querySelector("#home-button");
 
 homeButton.addEventListener("click", () => {
-  window.location.href = "index.html";
+  window.location.href = "index.html"
 });
+
+
