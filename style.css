@@ -7,15 +7,21 @@ body {
   justify-content: center;
   align-items: flex-start;
 
-  background: url("assets/images/ai-generated/HomeBackground.png");
+  background: url("assets/images/ai-generated/home-background.png");
 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 
-  /* start */
+  /* at start can only see background defined in body */
   opacity: 0;
   animation: fadeIn 2s ease forwards;
+}
+
+/* keyframes -> control animations sequence from opacity 0 -> 1; Now can see all defined #id .class  */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 /* main content on home screen */
@@ -98,7 +104,7 @@ body {
   align-items: center;
   flex-direction: column;
 
-  background: url("assets/images/ai-generated/thoughtsBackground.png");
+  background: url("assets/images/ai-generated/thoughts-background.png");
 
   background-size: cover;
   background-position: center;
@@ -128,7 +134,7 @@ body {
   transform: scale(1.025);
 }
 
-#thought-input {
+#thought-input-box {
   margin-top: 50px;
 
   background: transparent;
@@ -139,53 +145,70 @@ body {
   height: 100px;
 
   border-radius: 50px;
-  border: 20px solid color-mix(in srgb, color-mix(in hsl, hsl(200, 100%, 22%) 20%, rgb(47, 0, 255) 80%) 20%, transparent);
+  border: 20px solid color-mix(in srgb, color-mix(in hsl, hsl(261, 100%, 65%) 20%, rgb(230, 104, 255) 80%) 20%, transparent);
   background:
-    linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)) padding-box,
-    linear-gradient(45deg, rgba(255, 127, 80, 0), hwb(200 70% 10% / 0.5), rgba(255, 127, 80, 0)) border-box;
+    linear-gradient(rgba(245, 4, 253, 0.1), rgba(255, 65, 246, 0.05)) padding-box,
+    linear-gradient(45deg, rgba(255, 127, 80, 0), hwb(290 11% 0% / 0.5), rgba(236, 93, 255, 0.2)) border-box;
 
   filter: brightness(1.5);
 }
 
+#thought-input-box:focus {
+  outline: none;
 
-/* keyframes do from 0% to 100% */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  filter: hue-rotate(10deg);
+
+  background:
+    linear-gradient(rgba(245, 4, 253, 0.05), rgba(255, 65, 246, 0.025)) padding-box,
+    linear-gradient(45deg, rgba(255, 127, 80, 0), hwb(290 11% 0% / 0.3), rgba(236, 93, 255, 0.1)) border-box;
 }
 
 #thoughts-container {
-  font-size: 50px;
+  margin-top: 60px;
 }
 
-/* thought cards*/
-.thought-card {
-  position: relative;
-}
-
-
-@keyframes float {
+@keyframes floatCloud {
   0%   { transform: translateY(0px); }
-  50%  { transform: translateY(-15px); }
+  50%  { transform: translateY(15px); }
   100% { transform: translateY(0px); }
 }
 
 .thought-cloud {
   position: relative;
-  animation: float 4s ease-in-out infinite;
+  display: inline-block;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  max-width: 450px;
+
+  animation: floatCloud 4s ease-in-out infinite;
 }
 
 .thought-cloud img {
-  width: 380px;
+  width: 100%;
+  height: auto;
+  display: block;
+  
+  filter: drop-shadow(0 0 10px rgb(255, 255, 255));
+  filter: hue-rotate(20deg);
 }
 
-.thought-text {
+.thought-text-cloud {
+  display: block;
+  text-align: left;
+  word-break: break-word;
+  width: 400px;
+  
+  /* absolute -> Elemnt taken out of normal flow */
   position: absolute;
+  /* corner is in the middle of parent */
   top: 50%;
-  left: 50%;
+  left: 52.5%;
+  /* centreing elemtns in parent */
   transform: translate(-50%, -50%);
+
+
   color: black;
   font-size: 32px;
-  text-align: center;
+  /* When i use display: block; in img -> kills 4px gap under images | don't need it here but for leaning let's keep it...*/
 }
 
