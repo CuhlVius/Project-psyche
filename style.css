@@ -127,13 +127,45 @@ body {
 #row { 
   display: flex;
   justify-content: center;
-  gap: 400px;
+  justify-items: center;
+  align-items: flex-end;
+  gap: 2.5%;
+}
 
+#thought-counter {
+  margin: 0;
+  font-size: 100px;
+  width:135px;
+
+  color: white;
+
+  border-radius: 20px;
+  padding:  10px;
+
+  background:
+    linear-gradient(rgba(245, 4, 253, 0.05), rgba(255, 65, 246, 0.025)) padding-box,
+    linear-gradient(45deg, rgba(255, 127, 80, 0), hwb(290 11% 0% / 0.3), rgba(236, 93, 255, 0.1)) border-box;
+
+  position: relative;
+  overflow: hidden;
+}
+
+#thought-counter.wobble {
+  animation: wobble 0.6s ease-in-out;
+}
+
+
+@keyframes wobble {
+  0%   { transform: rotate(0deg)   scale(1);    }
+  25%  { transform: rotate(-8deg)  scale(1.15); }
+  50%  { transform: rotate(8deg)   scale(1.15); }
+  75%  { transform: rotate(-4deg)  scale(1.08); }
+  100% { transform: rotate(0deg)   scale(1);    }
 }
 
 #thought-input-box {
-  margin-top: 50px;
-
+  position: relative;
+  left: 7.5%;
   background: transparent;
   font-size: 50px;
   color: white;
@@ -146,25 +178,11 @@ body {
   background:
     linear-gradient(rgba(245, 4, 253, 0.1), rgba(255, 65, 246, 0.05)) padding-box,
     linear-gradient(45deg, rgba(255, 127, 80, 0), hwb(290 11% 0% / 0.5), rgba(236, 93, 255, 0.2)) border-box;
+  
+  box-shadow: 10px 10px 2.5px rgba(204, 0, 255, 0.1);
 
-  filter: brightness(1.5); 
-}
-
-#done-button {
-  position: absolute; 
-  width: 400px;
-  height: 220px;
-  left: 75%;
-
-  font-size: 42px;
-  color: white;
-
-  border: none;
-  border-radius: 30px;
-
-  background:
-    linear-gradient(rgba(245, 4, 253, 0.05), rgba(255, 65, 246, 0.025)) padding-box,
-    linear-gradient(45deg, rgba(255, 127, 80, 0), hwb(290 11% 0% / 0.3), rgba(236, 93, 255, 0.1)) border-box;
+  filter: brightness(1.7); 
+  text-shadow: #cc49ff 1px 0 10px;
 }
 
 #thought-input-box:focus {
@@ -176,6 +194,38 @@ body {
     linear-gradient(rgba(245, 4, 253, 0.05), rgba(255, 65, 246, 0.025)) padding-box,
     linear-gradient(45deg, rgba(255, 127, 80, 0), hwb(290 11% 0% / 0.3), rgba(236, 93, 255, 0.1)) border-box;
 }
+
+#ready-button {
+  position: relative;
+  left: 9%;
+  width: 380px;
+  height: 220px;
+
+  font-size: 110px;
+  color: white;
+
+  border: none;
+  border-radius: 30px;
+
+  background:
+    linear-gradient(rgba(245, 4, 253, 0.05), rgba(255, 65, 246, 0.025)) padding-box,
+    linear-gradient(45deg, rgba(255, 127, 80, 0), hwb(290 11% 0% / 0.3), rgba(236, 93, 255, 0.1)) border-box;
+
+  text-shadow: #cc49ff 1px 0 10px;
+}
+
+#ready-button:hover {
+
+  box-shadow:
+    0 0 20px rgba(174, 0, 255, 0.8),
+    0 0 35px rgba(255, 71, 230, 0.8);
+
+  filter: brightness(1.8);  
+
+  cursor: pointer;
+}
+
+
 
 #thoughts-container {
   display: flex;
@@ -214,6 +264,7 @@ body {
   word-break: break-word;
   width: 335px;
   
+  /* position set -> top, bottom, left, right does work now!*/
   /* absolute -> Elemnt taken out of normal flow */
   position: absolute;
   /* corner is in the middle of parent */
@@ -230,4 +281,3 @@ body {
 
 /*---> Tomorrow TASK <--- */
 /* Style the DONE-Box -> create infowindow left-center, letters apear 120ms changes at 4 thoughts to new info...  */
-

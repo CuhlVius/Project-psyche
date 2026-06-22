@@ -35,6 +35,8 @@ const thoughtsContainer = document.getElementById("thoughts-container");
 // Thoughts from input
 const thoughtInput = document.querySelector("#thought-input-box");
 
+const thoughtCounter = document.getElementById("thought-counter");
+
 // when thoughtInput -> this code can run, not? -> skip
 if (thoughtInput) {
   inputCounter = 0;
@@ -45,6 +47,23 @@ if (thoughtInput) {
   // when browser gives me Enter -> div, img, span
   if (event.key === "Enter" && inputCounter < 4) {
     inputCounter++;
+    
+    // thoughtCounter raises every cycle
+    thoughtCounter.textContent = inputCounter.toString() + "/4";
+
+    // thoughtCounter will wobble and goes green when 4/4
+    if (inputCounter > 3) {
+     thoughtCounter.style.color = "green";
+     thoughtCounter.classList.add("wobble");
+    }
+    // I'll keep that code... bute white gives more positive feelings as... orange or red x)
+    else if (inputCounter > 2) {
+      thoughtCounter.style.color = "white";
+    }
+    // I'll keep that code... bute white gives more positive feelings as... orange or red x)
+    if (inputCounter < 2){
+      thoughtCounter.style.color = "white";
+    }
     // Container for all Clouds
     const divClouds = document.createElement("div");
     divClouds.classList.add("thought-cloud");
@@ -66,14 +85,16 @@ if (thoughtInput) {
     thoughtsContainer.appendChild(divClouds); 
   }
   if (inputCounter === 4) {
-      const doneButton = document.getElementById("done-button");
-      doneButton.style.display = "block";    
+      const readyButton = document.getElementById("ready-button");
+      readyButton.style.visibility="visible";
   }
+  
 });
 }
 
+if (thoughtInput) {
 // creating the Text inside the textbox letter by letter
-const fullText = "What's on your mind?"
+const fullText = "What's on your mind?";
 let letters = 0;
 
 // runs every 120ms
@@ -87,6 +108,7 @@ const typing = setInterval(() => {
     clearInterval(typing);
   }
 }, 120);
+}
 
 
 
