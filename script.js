@@ -50,20 +50,13 @@ if (thoughtInput) {
     
     // thoughtCounter raises every cycle
     thoughtCounter.textContent = inputCounter.toString() + "/4";
-
+    
     // thoughtCounter will wobble and goes green when 4/4
     if (inputCounter > 3) {
      thoughtCounter.style.color = "green";
      thoughtCounter.classList.add("wobble");
     }
-    // I'll keep that code... bute white gives more positive feelings as... orange or red x)
-    else if (inputCounter > 2) {
-      thoughtCounter.style.color = "white";
-    }
-    // I'll keep that code... bute white gives more positive feelings as... orange or red x)
-    if (inputCounter < 2){
-      thoughtCounter.style.color = "white";
-    }
+
     // Container for all Clouds
     const divClouds = document.createElement("div");
     divClouds.classList.add("thought-cloud");
