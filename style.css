@@ -26,12 +26,12 @@ body {
 }
 
 /* main content on home screen */
-#screen-1-home {
+.screen-1-home {
   background-image: url("assets/images/ai-generated/home-background.png");
 }
 
 /* menu content */
-.menu {
+.selection-menu {
   margin-top: 180px;
 
   display: flex;
@@ -97,7 +97,7 @@ body {
   transform: scale(1.025);
 }
 
-#screen-2-thoughts {
+.screen-2-thoughts {
   background-image: url("assets/images/ai-generated/thoughts-background.png");
 }
 
@@ -125,6 +125,7 @@ body {
 }
 
 #row { 
+  margin-top: 2.5%;
   display: flex;
   justify-content: center;
   justify-items: center;
@@ -134,9 +135,9 @@ body {
 
 #thought-counter {
   margin: 0;
+  text-align: center;
   font-size: 100px;
-  width:135px;
-
+  width:200px;
   color: white;
 
   border-radius: 20px;
@@ -148,6 +149,8 @@ body {
 
   position: relative;
   overflow: hidden;
+
+  text-shadow: 1px 1px 0.5px rgb(255, 255, 255);
 }
 
 #thought-counter.wobble {
@@ -164,8 +167,6 @@ body {
 }
 
 #thought-input-box {
-  position: relative;
-  left: 7.5%;
   background: transparent;
   font-size: 50px;
   color: white;
@@ -195,13 +196,28 @@ body {
     linear-gradient(45deg, rgba(255, 127, 80, 0), hwb(290 11% 0% / 0.3), rgba(236, 93, 255, 0.1)) border-box;
 }
 
-#ready-button {
+#sparcle-effect {
   position: relative;
-  left: 9%;
-  width: 380px;
-  height: 220px;
+}
 
-  font-size: 110px;
+/* Creating little balls*/ 
+.particle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: sparkle 1s ease-out forwards;
+}
+
+@keyframes sparkle {
+  0%    { transform: translateY(0px); opacity: 1;}
+  100%  { transform: translateY(-120px); opacity: 0;}
+}
+
+#ready-button {
+  width: 200px;
+  font-size: 60px;
   color: white;
 
   border: none;
@@ -212,6 +228,7 @@ body {
     linear-gradient(45deg, rgba(255, 127, 80, 0), hwb(290 11% 0% / 0.3), rgba(236, 93, 255, 0.1)) border-box;
 
   text-shadow: #cc49ff 1px 0 10px;
+  padding:  35px 10px;
 }
 
 #ready-button:hover {
@@ -222,15 +239,18 @@ body {
 
   filter: brightness(1.8);  
 
+  transform: translateY(-1px);
   cursor: pointer;
 }
 
-
+#ready-button:active {
+  transform: scale(0.95);
+}
 
 #thoughts-container {
   display: flex;
   align-content: flex-end;
-  margin-top: 100px;
+  margin-top: 7.5%
 }
 
 @keyframes floatCloud {
@@ -243,19 +263,16 @@ body {
   position: relative;
   display: inline-block;
   margin-left: 20px;
-  margin-bottom: 20px;
-  max-width: 400px;
-
+  max-width: 450px;
   animation: floatCloud 4s ease-in-out infinite;
 }
 
-.thought-cloud img { 
+.thought-cloud img {
   width: 100%;
   height: auto;
   display: block;
-  
-  filter: drop-shadow(0 0 10px rgb(255, 255, 255));
-  filter: hue-rotate(20deg);
+  filter: drop-shadow(0 0 10px rgb(255, 255, 255)) hue-rotate(20deg);
+  opacity: 80%;
 }
 
 .thought-text-cloud {   
@@ -273,11 +290,7 @@ body {
   /* centreing elemtns in parent */
   transform: translate(-50%, -50%);
 
-
   color: black;
   font-size: 32px;
-  /* When i use display: block; in img -> kills 4px gap under images | don't need it here but for leaning let's keep it...*/
 }
 
-/*---> Tomorrow TASK <--- */
-/* Style the DONE-Box -> create infowindow left-center, letters apear 120ms changes at 4 thoughts to new info...  */

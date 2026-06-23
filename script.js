@@ -103,7 +103,29 @@ const typing = setInterval(() => {
 }, 120);
 }
 
+// creats sparcle effect for readyButton
+const sparcleEffect = document.getElementById("sparcle-effect");
 
+if(sparcleEffect) {
+  let sparcleIntervall = null;
 
+  sparcleEffect.addEventListener("mouseenter", () => {
+    sparcleIntervall = setInterval(() => {
+      const particleDot = document.createElement("div");
+      // give particleDot the class: "particle" used in style.css
+      particleDot.classList.add("particle")
+      // create position of particles randomly 0-100% -> horizontal 
+      particleDot.style.left = Math.random() * 100 + "%";
+      // particles rise from bottom
+      particleDot.style.bottom = "0px";
+      particleDot.style.background = "rgb(204, 73, 255)";
+      // ad it to stage
+      sparcleEffect.appendChild(particleDot);
+      setTimeout(() => particleDot.remove(), 1000);
+    }, 100);
+  });
 
-
+  sparcleEffect.addEventListener("mouseleave", () => {
+    clearInterval(sparcleIntervall);
+  })
+}
