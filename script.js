@@ -23,7 +23,7 @@ if (thoughtsButton) {
 }
 
 // thoughts.html buttons
-const homeThoughtButton = document.getElementById("home-thoughts-button");
+const homeThoughtButton = document.querySelector(".home-purple-button");
 if (homeThoughtButton) {
   homeThoughtButton.addEventListener("click", () => {
     window.location.href = "index.html";
@@ -34,27 +34,47 @@ if (homeThoughtButton) {
 const thoughtsContainer = document.getElementById("thoughts-container");
 // Thoughts from input
 const thoughtInput = document.querySelector("#thought-input-box");
-
 const thoughtCounter = document.getElementById("thought-counter");
+const readyButton = document.getElementById("ready-button");
 
 // when thoughtInput -> this code can run, not? -> skip
 if (thoughtInput) {
+
   inputCounter = 0;
+  
   // "=" -> sets value | "===" is this equal to...?"
   // listen for "keydown"
   // I GET IT ---> "hey thoughtInput, whenever a key goes down, give me info about that event, and if the key was Enter → run this code"
+
+  // set color of thoughtCounter -> WHY DOES IT ONYL WORK AT THAT PLAY WITH COLOR AT BEGINNING???
+  thoughtCounter.style.color = "rgba(204, 73, 255, 0.5)";
+  thoughtCounter.style.filter = "saturate(1)";
   thoughtInput.addEventListener("keydown", (event) => {
+    
   // when browser gives me Enter -> div, img, span
   if (event.key === "Enter" && inputCounter < 4) {
     inputCounter++;
-    
+
     // thoughtCounter raises every cycle
     thoughtCounter.textContent = inputCounter.toString() + "/4";
     
     // thoughtCounter will wobble and goes green when 4/4
     if (inputCounter > 3) {
-     thoughtCounter.style.color = "green";
+     thoughtCounter.style.color = "rgba(204, 73, 255, 0.5)";
+     thoughtCounter.style.filter = "saturate(9)";
      thoughtCounter.classList.add("wobble");
+    }
+    else if (inputCounter > 2){
+     thoughtCounter.style.color = "rgba(204, 73, 255, 0.5)";
+     thoughtCounter.style.filter = "saturate(7)";
+    }
+    else if (inputCounter > 1) {
+     thoughtCounter.style.color = "rgba(204, 73, 255, 0.5)";
+     thoughtCounter.style.filter = "saturate(5)";
+    }
+    else {
+     thoughtCounter.style.color = "rgba(204, 73, 255, 0.5)";
+     thoughtCounter.style.filter = "saturate(3)";
     }
 
     // Container for all Clouds
@@ -78,7 +98,6 @@ if (thoughtInput) {
     thoughtsContainer.appendChild(divClouds); 
   }
   if (inputCounter === 4) {
-      const readyButton = document.getElementById("ready-button");
       readyButton.style.visibility="visible";
   }
   
@@ -129,3 +148,11 @@ if(sparcleEffect) {
     clearInterval(sparcleIntervall);
   })
 }
+
+// move from readyButton -> emotions.html
+if (readyButton) {
+  readyButton.addEventListener("click", () => {
+  window.location.href = "emotions.html";
+  })
+}
+

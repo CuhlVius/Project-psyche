@@ -130,4 +130,20 @@ thoughtTextCloud.textContent = thoughtInput.value;
 - **🔍**: Opening files by double-click runs them as file:// → browser reports...
 - **🔧**: Run a local server (Live Server in VS Code → "Go Live") → pages load over http:// instead.
 - **💡**: file:// = isolated/locked-down. Not a code bug — an environment thing. 
-## 2026-06-23
+
+## 2026-06-24
+### **`JV`** - `addEventListener` is not a function
+
+- **🐛**: clicking a button threw `Uncaught TypeError: homeButton.addEventListener is not a function`
+- **🔍**: I'd switched to `getElementsByClassName` → returns a list (collection), not one element. A list has no .addEventListener. In addition `if (homeButton)` still passed because an empty collection is truthy.
+- **🔧**: `getElementsByClassName("home-button")` ❌ → `querySelector(".home-button")` ✅ (one element), or loop the collection to add a listener to each
+- **💡**: `getElementById` → one element. `getElementsByClassName` / `querySelectorAll` → a list. Lists don't have element methods, and a list can still fool an if check.
+
+---
+
+### **`CSS`** - `height: 80%` does nothing on a div
+
+- **🐛**: `height: 80%` on `#cloud-store` was ignored completely
+- **🔍**: `%` height is measured against the PARENT's height. But `div`, `body`, `html` all default to `height: auto` → 80% of nothing = nothing. 
+- **🔧**: build the chain from the top → `html, body { height: 100%; }`, `html` is the special link, its 100% measures against the viewport, then height flows down html → body → child
+- **💡**: percentage heights need an unbroken chain of real heights all the way up to `<html>`. `html` is the one that touches the screen.

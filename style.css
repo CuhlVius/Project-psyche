@@ -1,4 +1,9 @@
 /* BODY */
+/* same as html height: 100%; and body: 100%*/ 
+html, body {
+  height: 100%;
+}
+
 body {
   margin: 0;
   /* every screen gets full height, set once */
@@ -30,6 +35,17 @@ body {
   background-image: url("assets/images/ai-generated/home-background.png");
 }
 
+.screen-2-thoughts {
+  background-image: url("assets/images/ai-generated/thoughts-background.png");
+}
+
+.screen-3-emotions {
+  /* Viewport is PARENT of the CHILD div with the class="screen-3-emotions"*/
+  /* setting height so for childs of screen-3-emotions -> no default anymore*/
+  background-image: url("assets/images/ai-generated/emotions-background.png");
+  display: flex;
+  justify-content: flex-end;
+}
 /* menu content */
 .selection-menu {
   margin-top: 180px;
@@ -97,12 +113,8 @@ body {
   transform: scale(1.025);
 }
 
-.screen-2-thoughts {
-  background-image: url("assets/images/ai-generated/thoughts-background.png");
-}
-
 /* button → controls background, border, cursor, transition | the frame */
-#home-thoughts-button {
+.home-purple-button {
   margin-top: 30px;
   
   /* transparent 50% -> wrong syntax -> browser ignoring it -> set to default = white */
@@ -115,13 +127,18 @@ body {
 }
 
 /* img → only controls the image size | <img> picture inside the fram */
-#home-thoughts-button img {
+.home-purple-button img {
   height: 200px;
 }
 
-#home-thoughts-button:hover {
+.home-purple-button:hover {
   filter: brightness(1.15);
   transform: scale(1.025);
+}
+
+/* This means: modify .home-purple-button -> but only when it's inside .screen-3-emotions */
+.screen-3-emotions .home-purple-button {
+  filter: hue-rotate(270deg);
 }
 
 #row { 
@@ -218,7 +235,8 @@ body {
 #ready-button {
   width: 200px;
   font-size: 60px;
-  color: white;
+  color: rgba(222, 139, 255, 0.5);
+  filter: saturate(1);
 
   border: none;
   border-radius: 30px;
@@ -232,7 +250,8 @@ body {
 }
 
 #ready-button:hover {
-
+  color: rgba(222, 139, 255, 0.425);
+  filter: saturate(1);
   box-shadow:
     0 0 20px rgba(174, 0, 255, 0.8),
     0 0 35px rgba(255, 71, 230, 0.8);
@@ -294,3 +313,18 @@ body {
   font-size: 32px;
 }
 
+#cloud-store {
+  /* grwoing to fill whatever empty space is available on that side*/
+  margin-left: auto;
+  
+  border: solid 10px rgba(255, 0, 255, 0.445);
+  width: 25%;
+  /*height is set by default, when parent has no height set = height of element inside*/
+  height: 80%;
+  
+  background: linear-gradient(135deg,
+      rgba(0, 225, 255, 0.4),
+      rgba(0, 225, 255, 0.6),
+      rgba(0, 225, 255, 0.8));
+  filter: blur(25px);
+}
