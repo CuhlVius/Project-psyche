@@ -18,9 +18,9 @@ body {
 
   display: flex;
   /* Y | start = top, end = bottom */
-  justify-content:flex-start;
+  justify-content: flex-start;
   /* X  | start = left, end = right */
-  align-items:center;
+  align-items: center;
   flex-direction: column;
 }
 
@@ -43,8 +43,6 @@ body {
   /* Viewport is PARENT of the CHILD div with the class="screen-3-emotions"*/
   /* setting height so for childs of screen-3-emotions -> no default anymore*/
   background-image: url("assets/images/ai-generated/emotions-background.png");
-  display: flex;
-  justify-content: flex-end;
 }
 /* menu content */
 .selection-menu {
@@ -229,7 +227,7 @@ body {
 
 @keyframes sparkle {
   0%    { transform: translateY(0px); opacity: 1;}
-  100%  { transform: translateY(-120px); opacity: 0;}
+  100%  { transform: translateY(-150px); opacity: 0;}
 }
 
 #ready-button {

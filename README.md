@@ -39,9 +39,9 @@ Documenting every bug I solve and what I learn from it → [Bug Log](bugs/BUGS.m
 
 ## 🗺️ Where this is going
 
-Here are a few ideas and features I'm working on. Just the beginning.
+Here are a few ideas and features I'm working on.
 
-![Psyche roadmap](ideas/psyche-roadmap.png)
+![Psyche roadmap](ideas/psyche-roadmap-new.png)
 
 ## 🙏Credits
 

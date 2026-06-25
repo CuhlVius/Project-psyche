@@ -141,7 +141,7 @@ if(sparcleEffect) {
       // ad it to stage
       sparcleEffect.appendChild(particleDot);
       setTimeout(() => particleDot.remove(), 1000);
-    }, 100);
+    }, 50);
   });
 
   sparcleEffect.addEventListener("mouseleave", () => {
