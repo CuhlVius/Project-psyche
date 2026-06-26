@@ -61,20 +61,20 @@ if (thoughtInput) {
     // thoughtCounter will wobble and goes green when 4/4
     if (inputCounter > 3) {
      thoughtCounter.style.color = "rgba(204, 73, 255, 0.5)";
-     thoughtCounter.style.filter = "saturate(9)";
+     thoughtCounter.style.filter = "brightness(1.3)";
      thoughtCounter.classList.add("wobble");
     }
     else if (inputCounter > 2){
      thoughtCounter.style.color = "rgba(204, 73, 255, 0.5)";
-     thoughtCounter.style.filter = "saturate(7)";
+     thoughtCounter.style.filter = "brightness(1.2)";
     }
     else if (inputCounter > 1) {
      thoughtCounter.style.color = "rgba(204, 73, 255, 0.5)";
-     thoughtCounter.style.filter = "saturate(5)";
+     thoughtCounter.style.filter = "brightness(1.1)";
     }
     else {
      thoughtCounter.style.color = "rgba(204, 73, 255, 0.5)";
-     thoughtCounter.style.filter = "saturate(3)";
+     thoughtCounter.style.filter = "brightness(1)";
     }
 
     // Container for all Clouds
