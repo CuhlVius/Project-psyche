@@ -119,9 +119,9 @@ thoughtTextCloud.textContent = thoughtInput.value;
 ### **`JS`** - null crash loops forever
 
 - **🐛**: On index.html the console spams the same error hundreds of times (252+), never stops.
-- **🔍**: script.js is shared across both pages. The typewriter code uses `thoughtInput`, but the input box only exists on thoughts.html. On index.html `thoughtInput` = null. That line lives inside a `setInterval(..., 120)` -> it retries every 120ms forever -> the null crash repeats infinitely.
+- **🔍**: script.js is shared across both pages. The typewriter code uses `thoughtInput`, but the input box only exists on thoughts.html. On index.html `thoughtInput` = null. That line lives inside a `setInterval(..., 120)` → it retries every 120ms forever → the null crash repeats infinitely.
 - **🔧**: Wrapped the whole typewriter block in `if (thoughtInput) { ... }` so it's skipped entirely when the input doesn't exist on the page.
-- **💡**: A bug inside a repeating timer (`setInterval`) repeats WITH the timer -> one mistake becomes infinite spam.
+- **💡**: A bug inside a repeating timer (`setInterval`) repeats WITH the timer → one mistake becomes infinite spam.
 - **👀**: When shared JS runs on multiple pages, guard every block that touches a page-specific element with `if (element) { ... }`. An element missing on one page = null = crash there.
 ---
 ### **`ENV`** - file:// security errors & caching weirdness
@@ -149,12 +149,11 @@ thoughtTextCloud.textContent = thoughtInput.value;
 - **💡**: percentage heights need an unbroken chain of real heights all the way up to `<html>`. `html` is the one that touches the screen.
 
 ## 2026-06-27
-
 ### **`JS`** - Cannot read properties of null (reading `appendChild`)
 
 - **🐛**: Crash on emotions.html when rebuilding clouds.
 
-![done button no push](/bugs/bug-images/read-properties-of-null.png)
+![Cannot read prperties of null](/bugs/bug-images/read-properties-of-null.png)
 
 - **🔍**: `thoughtsContainer` is null, because it only exists on thoughts.html → Cannot read `appendChild` of null
 ```JS 
@@ -171,3 +170,34 @@ createFloatingClouds(thoughtInput.value, thoughtsContainer);                    
 createFloatingClouds(thoughtsArray[thoughtsNumber], thoughtsCollectedContainer);  // emotions page
 ```
 - **💡**: `Cannot read properties of null` almost always means an element wasn't found 
+
+## 2026-06-28
+### **`JS`** - Sparkle particles stacked +20 in every Enter
+
+- **🐛**: Hovering the readyButton spawned more and more particles each time I pressed Enter → +20, +40, +60...
+
+![Sparkle particles stacked](/bugs/bug-images/particles-stacked.png)
+
+- **🔍**: `sparkleEffect()` was called inside `keydown`, in the `if (inputCounter === MAX_THOUGHTS)` block. Once the counter hit MAX, that block stayed true, so every following Enter ran `sparkleEffect()` again, and each call adds a NEW `mouseenter` listener. More listeners = more intervals = stacking particles.
+- **🔧**: Created a flag `sparkleEffectSwitch = true;` which changes to `sparkleEffectSwitch = false;` after `sparkleEffect()` was called OR just load it once in init() (then no risk to manage, maybe better one) BUT it's much more code an more complicated!
+- **💡**: `if`-guard stops code from running, but it doesn't fix code that's in the wrong place, IMPORTANT: load = setup once. event = respond every time. flag = do once, then never again. I chose flag, because it only adds 2 lines and it's task is very clear and good readable!
+
+---
+
+### **`JS`** - Only 1 of 4 clouds appeared on `emotions.html`
+- **🐛**: Recreating clouds from localStorage, only the first cloud showed.
+- **🔍**: `createFloatingClouds` had no `return divClouds;`, so `const cloud = ...` was `undefined`, and `undefined.addEventListener()` CRASHED the script → loop died after cloud 1.
+- **🔧**: Added `return divClouds;` as the LAST line of `createFloatingClouds` (after appendChild). Caught it in the loop with `const cloud = ...`, then added the listener to `cloud`.
+- **💡**: `return` = the function hands a VALUE back to whoever called it (the caller catches it in a variable). It must be the last line, nothing after it runs. No return + someone uses the result = `undefined` crash.
+
+---
+
+### **`JS`** - Dragged cloud jumped — mouse stuck to top-left corner
+
+- **🐛**: When I grabbed a cloud anywhere except its corner, it teleported so its top-left corner snapped under my mouse.
+- **🔍**: `activeCloud.style.left = event.clientX + "px"` and `activeCloud.style.top = event.clientY + "px"` puts the cloud's CORNER at the mouse. So grabbing the middle made the corner jump to the cursor.
+
+- **🔧**: On mousedown, measure how far INSIDE the cloud I clicked, using`getBoundingClientRect()` (gives the cloud's corner position on screen): offsetX = event.clientX - rect.left offsetY = event.clientY - rect.top Then on mousemove, place the cloud at (mouse - offset) so the cursor stays on the exact spot I grabbed.
+- **💡**: client = mouse from screen edge. rect = cloud from screen edge. offset = the gap between them = how deep I grabbed. Subtract it back while moving. 
+
+![Sparkle particles stacked](/bugs/bug-images/drag-offset-with-clientx-clienty.png)

@@ -106,6 +106,7 @@ function counterAppearing(thoughtCounter, inputCounter) {
 
 // Page feature
 function featureThoughts() {
+  let sparkleEffectSwitch = true;
   // cointainer to collect all thought-inputs
   const thoughtsContainer = document.getElementById("thoughts-container");
   // display counter for entered thoughts
@@ -131,11 +132,12 @@ function featureThoughts() {
         // clearing the text-field
         thoughtInput.value = "";
       }
-      if (inputCounter === MAX_THOUGHTS) {
+      if (inputCounter === MAX_THOUGHTS && sparkleEffectSwitch) {
         // creats sparkle effect for readyButton
         const sparkleVisual = document.getElementById("sparkle-effect");
         readyButton.style.visibility = "visible";
         sparkleEffect(sparkleVisual);
+        sparkleEffectSwitch = false;
       }
     });
   }
@@ -148,8 +150,48 @@ function thoughtsRecreateOnDocEmotions() {
     // || [] protects .length from crashing if parse gave nothing!
     thoughtsArray = JSON.parse(thoughtsJson) || [];
 
+    // cloud i'm dragging right now
+    let activeCloud = null;
+    // dragging?
+    let isDragging = false;
+
+    // set offset in X and Y to adjust mouse while dragging, keep mouse where I started to grap
+    let offsetX = 0;
+    let offsetY = 0;
+
+    // when the mouse is moving measured values for X and Y ensure that mouse stays where I started to grap
+    document.addEventListener("mousemove", (event) => {
+      if (!isDragging) return;
+        // that spot where I klicked
+        activeCloud.style.left = (event.clientX - offsetX) + "px";
+        activeCloud.style.top = (event.clientY - offsetY) + "px";
+    })
+
+    // when I'm not holding that one klick anymore, then release the cloud
+    document.addEventListener("mouseup", (event) => {
+      isDragging = false;
+    })
+
     for (let thoughtsNumber = 0; thoughtsNumber < thoughtsArray.length; thoughtsNumber++) {
-      createFloatingClouds(thoughtsArray[thoughtsNumber], thoughtsCollectedContainer);
+      // Store created cloud
+      const cloud = createFloatingClouds(thoughtsArray[thoughtsNumber], thoughtsCollectedContainer);
+
+      // When I klick, the returned clouds I built before getting chatched by Eventlistener
+      // When the event happens, I'm dragging
+      cloud.addEventListener("mousedown", (event) => {
+        activeCloud = cloud;
+        isDragging = true;
+
+        // No 🚫 "can't drop here-Symbol" is appearing!
+        event.preventDefault();
+
+        // hands back an object with measuremtns -> rectangle
+        const rect = cloud.getBoundingClientRect();
+        // rect.left -> distance from screen's left edge to cloud's left edge (px)
+        offsetX = event.clientX - rect.left;
+        // rect.top -> distance from screen's top edge to cloud's top edge (px)
+        offsetY = event.clientY - rect.top;
+      });
     }
   }
 }
@@ -174,7 +216,10 @@ function createFloatingClouds(input, container) {
   divClouds.appendChild(imgCloud);
   divClouds.appendChild(thoughtTextCloud);
   container.appendChild(divClouds);
+  // give that value for the drag and drop catch later!
+  return divClouds;
 }
+
 
 //order matters inside a function, not between functions.
 function init() {
@@ -193,7 +238,3 @@ function init() {
 // only run init when HTML is fullry parsed!  //defer -> also wait's until HTML is parsed -> covers globals  //without defer, globals -> null
 // defer makes the whole script wait for DOM! -> dealy -> saves globals form grabbing -> null
 document.addEventListener("DOMContentLoaded", init);
-
-
-
-
